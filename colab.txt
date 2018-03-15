@@ -1,0 +1,41 @@
+## FIRST CELL
+
+"""
+DON'T MODIFY ANYTHING IN THIS CELL
+"""
+!pip install -U -q PyDrive
+from pydrive.auth import GoogleAuth
+from pydrive.drive import GoogleDrive
+from google.colab import auth
+from oauth2client.client import GoogleCredentials
+
+# 1. Authenticate and create the PyDrive client.
+auth.authenticate_user()
+gauth = GoogleAuth()
+gauth.credentials = GoogleCredentials.get_application_default()
+drive = GoogleDrive(gauth)
+
+# 2. Load a file by ID and create local file.
+downloaded = drive.CreateFile({'id':'1-BS_mmlPvHf6JtmT9-SCQj7gpIstvAE8'}) # replace fileid with Id of file you want to access
+downloaded.GetContentFile('helper.py') 
+
+downloaded = drive.CreateFile({'id':'1-Q2p_i-SY9QY6aAdPS0i-fDqe3H9WNSk'}) # replace fileid with Id of file you want to access
+downloaded.GetContentFile('preprocess.p') 
+
+downloaded = drive.CreateFile({'id':'1eyGz9mk4g33AD_6uLJ54laaRH72i-ePN'}) # replace fileid with Id of file you want to access
+downloaded.GetContentFile('problem_unittests.py') 
+
+downloaded = drive.CreateFile({'id':'1_QWefcaDKMpc09uI_xmKxhI20m7t1OYs'}) # replace fileid with Id of file you want to access
+downloaded.GetContentFile('small_vocab_en') 
+
+downloaded = drive.CreateFile({'id':'1Vz5wwXRj7_wOGrAcRzAfaffOSrrO3woS'}) # replace fileid with Id of file you want to access
+downloaded.GetContentFile('small_vocab_fr') 
+
+
+import helper
+import problem_unittests as tests
+
+source_path = 'small_vocab_en'
+target_path = 'small_vocab_fr'
+source_text = helper.load_data(source_path)
+target_text = helper.load_data(target_path)
